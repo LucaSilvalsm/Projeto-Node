@@ -1,0 +1,42 @@
+body{
+    background-color: #eceff1;
+
+    font-size: 20px;
+}
+.navbar {
+    align-items: center;
+    text-align: center;
+}
+.centralizado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+    padding: 0 10px;
+    margin-left: 20px;  /* Ajuste o valor conforme necessário */
+    margin-right: 20px;  /* Ajuste o valor conforme necessário */
+    
+  }
+/* Garantir que a altura do body e html ocupe 100% da altura da tela */
+html, body {
+    height: 100%;
+    margin: 0; /* Remove as margens padrões do navegador */
+  }
+  
+  /* Container que envolve o conteúdo principal e o footer */
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Garante que o wrapper ocupe 100% da altura */
+  }
+  
+  /* O conteúdo da página que vai ocupar o espaço restante */
+  .content {
+    flex: 1; /* Faz o conteúdo principal ocupar o espaço restante */
+  }
+  
+  /* Footer */
+  footer {
+    margin-top: auto; /* Faz o footer ficar no final */
+  }
