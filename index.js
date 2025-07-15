@@ -2,21 +2,44 @@ const express = require('express');
 const conectar = require('./Database/database');
 const app = express();
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
+const session = require('express-session'); // Adicionei a sessão para usar o flash
 
-// Importando os Dominions 
+// Importando os Models
+const Category = require('./categories/Category');
+const Article = require('./Articles/Article');
+
+// Importando os Controllers
 const categoriaController = require('./categories/categoriesController');
 const loginController = require('./login/loginController');
-// carregando a views engine
 
+// Carregando a views engine
 app.set('view engine', 'ejs');
+
 // Setando arquivos estáticos como CSS
 app.use(express.static('public'));
+
 // Setando o body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Setando o banco de dados
+// Configurando a sessão antes do flash
+app.use(session({
+    secret: 'seu-segredo',
+    resave: false,
+    saveUninitialized: true
+}));
 
+// Configurando o middleware do flash
+app.use(flash());
+
+// Middleware para tornar as mensagens acessíveis nas views
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
+// Conexão com o banco de dados
 conectar.authenticate()
     .then(() => {
         console.log('Conexão com o banco de dados foi estabelecida');
@@ -25,16 +48,16 @@ conectar.authenticate()
         console.log(msgError);
     });
 
-// Para utilizar as rotas criadas
-
+// Definindo as rotas
 app.use('/', categoriaController);
 app.use('/', loginController);
 
 app.get('/', (req, res) => {
     res.render('index');
-})
+});
 
-app.listen(8080,()=>{
+// Iniciando o servidor
+app.listen(8080, () => {
     console.log('Server rodando na porta 8080');
     console.log('Visit http://localhost:8080 ');
-})
+});

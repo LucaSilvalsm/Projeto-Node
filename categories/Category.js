@@ -16,5 +16,5 @@ const Category = conn.define('categorires',{
         allowNull: false
     }
 })
-
+// Category.sync({force: true}) // sincronizando a tabela, force: true para recriar a tabela
 module.exports = Category;

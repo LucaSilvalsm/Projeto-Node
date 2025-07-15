@@ -1,12 +1,14 @@
-body{
+/* Cor de fundo e tamanho da fonte */
+body {
     background-color: #eceff1;
-
     font-size: 20px;
 }
+
 .navbar {
     align-items: center;
     text-align: center;
 }
+
 .centralizado {
     display: flex;
     justify-content: center;
@@ -16,27 +18,62 @@ body{
     padding: 0 10px;
     margin-left: 20px;  /* Ajuste o valor conforme necessário */
     margin-right: 20px;  /* Ajuste o valor conforme necessário */
-    
-  }
+}
+
 /* Garantir que a altura do body e html ocupe 100% da altura da tela */
 html, body {
     height: 100%;
     margin: 0; /* Remove as margens padrões do navegador */
-  }
-  
-  /* Container que envolve o conteúdo principal e o footer */
-  .wrapper {
+}
+
+/* Container que envolve o conteúdo principal e o footer */
+.wrapper {
     display: flex;
     flex-direction: column;
     height: 100%; /* Garante que o wrapper ocupe 100% da altura */
-  }
-  
-  /* O conteúdo da página que vai ocupar o espaço restante */
-  .content {
+}
+
+/* O conteúdo da página que vai ocupar o espaço restante */
+.content {
     flex: 1; /* Faz o conteúdo principal ocupar o espaço restante */
-  }
-  
-  /* Footer */
-  footer {
+}
+
+/* Footer */
+footer {
     margin-top: auto; /* Faz o footer ficar no final */
-  }
+}
+/* Container das mensagens de flash */
+.msg-container {
+  padding: 15px;
+}
+
+/* Classe base para todas as mensagens */
+.msg {
+  width: 60%;
+  margin: 0 auto;
+  padding: 10px;
+  border: solid 1px #000;
+  text-align: center;
+}
+
+/* Estilo para mensagens de erro */
+.msg.error {
+  color: #842029;
+  background-color: #F8D7DA;
+  border-color: #F5C2C7;
+}
+
+/* Estilo para mensagens de sucesso */
+.msg.success {
+  color: black;
+  background-color: #D1E7DD;
+  border-color: #BADBCC;
+}
+
+
+/* Resposta responsiva */
+@media (max-width: 768px) {
+    .msg {
+        width: 90%;  /* Em telas pequenas, a mensagem ocupará 90% da largura */
+    }
+}

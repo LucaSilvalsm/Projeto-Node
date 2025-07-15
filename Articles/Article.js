@@ -19,6 +19,10 @@ const Article = conn.define('article',{
 })
 // fazendo os relacionamentos entre as tabelas
 
-Article.belongsTo(Category, {foreignKey: 'category_id'});
+Article.belongsTo(Category, {foreignKey: 'category_id'}); // um artigo pertence a uma categoria
+
 Category.hasMany(Article, {foreignKey: 'category_id'});
+// uma categoria pode ter muitos artigos
+
+// Article.sync({force: true}) // sincronizando a tabela, force: true para recriar a tabela
 module.exports = Article;
