@@ -3,7 +3,7 @@ const conectar = require('./Database/database');
 const app = express();
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
-const session = require('express-session'); // Adicionei a sessão para usar o flash
+const session = require('express-session'); // Adicionei a Session para usar o flash
 
 // Importando os Models
 const Category = require('./categories/Category');
@@ -61,3 +61,4 @@ app.listen(8080, () => {
     console.log('Server rodando na porta 8080');
     console.log('Visit http://localhost:8080 ');
 });
+// Sincronizando os modelos com o banco de dados

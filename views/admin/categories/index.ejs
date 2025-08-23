@@ -1,0 +1,64 @@
+<%- include('../partials/header') %> <%- include('../partials/navbar') %>
+
+<body>
+  <div class="wrapper">
+    <!-- O conteúdo principal da página vai aqui -->
+    <div class="content">
+      <div class="container">
+        <br />
+
+        <!-- Exibindo mensagens de sucesso e erro -->
+        <div class="container">
+          <% if (success.length > 0 || error.length > 0) { %>
+          <div class="msg-container">
+            <% if (success.length > 0) { %>
+            <div class="msg success"><%= success[0] %></div>
+            <% } %> <% if (error.length > 0) { %>
+            <div class="msg error"><%= error[0] %></div>
+            <% } %>
+          </div>
+          <% } %>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h1 class="text-center">Categoria</h1>
+          </div>
+          <div class="card-body">
+            <a type="submit" href="/admin/categories/new" class="btn btn-primary"> Criar Categoria</a>
+           
+          </div>
+        </div>
+        <hr />
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Titulo</th>
+              <th scope="col">Slug</th>
+              <th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody>           
+            <% categories.forEach(category => { %>
+            <tr>
+              <th scope="row"><%= category.id %></th>
+              
+              <td><%= category.title %></td>
+              <td><%= category.slug %></td>
+              <td>
+                <a href="/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
+                <a href="/categories/delete/<%= category.id %>" class="btn btn-danger">Excluir</a>
+              </td>
+            </tr>
+            <% }) %>
+           
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Rodapé -->
+    <%- include('../partials/footer') %>
+  </div>
+</body>

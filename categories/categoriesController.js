@@ -11,6 +11,8 @@ const flash = require('connect-flash');
 
 
 router.get("/admin/categories/new", (req, res) => {
+  // Renderiza a página de criação de nova categoria
+    
     res.render("admin/categories/new");
 });
 router.post("/categories/save", (req, res) => {
@@ -22,7 +24,7 @@ router.post("/categories/save", (req, res) => {
       slug: slugify(title)
     }).then(() => {
       req.flash("success", "Categoria criada com sucesso!"); // Mensagem de sucesso
-      res.redirect("/"); // Redireciona para a página principal após sucesso
+      res.redirect("/admin/categories/index"); // Redireciona para a página principal após sucesso
     }).catch((error) => {
       req.flash("error", "Erro ao criar a categoria!"); // Mensagem de erro
       res.redirect("/admin/categories/new"); // Redireciona para a página de criação se houver erro
@@ -33,5 +35,11 @@ router.post("/categories/save", (req, res) => {
   }
 });
 
+router.get("/admin/categories", (req, res) => {
+    Category.findAll().then(categories => {
 
+    res.render("admin/categories/index",{categories: categories});
+    });
+
+});
 module.exports = router;
