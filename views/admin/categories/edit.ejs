@@ -1,0 +1,46 @@
+<%- include('../partials/header') %> 
+<%- include('../partials/navbar') %>
+
+<body>
+  <div class="wrapper">
+    <!-- O conteúdo principal da página vai aqui -->
+    <div class="content">
+      <div class="container">
+        <br>
+        
+        <!-- Exibindo mensagens de sucesso e erro -->
+        <div class="container">
+        <% if (success.length > 0 || error.length > 0) { %>
+        <div class="msg-container">
+          <% if (success.length > 0) { %>
+          <div class="msg success"><%= success[0] %></div>
+          <% } %> <% if (error.length > 0) { %>
+          <div class="msg error"><%= error[0] %></div>
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h1 class="text-center">Edição da Categoria</h1>
+          </div>
+          <div class="card-body">
+            <form action="/categories/update" method="POST">
+              
+              <div class="mb-3">
+                <label for="name" class="form-label">Nome da Categoria</label>
+                <input type="hidden" name="id" value="<%= category.id %>">
+                <input type="text" class="form-control" id="name" placeholder="<%= category.title %>" name="name"  required/>
+              </div>
+              <button type="submit" class="btn btn-primary"> Atualizar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rodapé -->
+    <%- include('../partials/footer') %>
+  </div>
+</body>
