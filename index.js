@@ -11,6 +11,7 @@ const Article = require('./Articles/Article');
 
 // Importando os Controllers
 const categoriaController = require('./categories/categoriesController');
+const articlesController = require('./Articles/ArticlesController');
 const loginController = require('./login/loginController');
 
 // Carregando a views engine
@@ -51,6 +52,7 @@ conectar.authenticate()
 // Definindo as rotas
 app.use('/', categoriaController);
 app.use('/', loginController);
+app.use('/', articlesController);
 
 app.get('/', (req, res) => {
     res.render('index');

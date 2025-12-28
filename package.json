@@ -22,6 +22,7 @@
     "pg-hstore": "^2.3.4",
     "projeto-node": "file:",
     "sequelize": "^6.37.5",
-    "slugify": "^1.6.6"
+    "slugify": "^1.6.6",
+    "tinymce": "^8.3.0"
   }
 }

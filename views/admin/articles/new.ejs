@@ -1,0 +1,60 @@
+<%- include('../partials/header') %> 
+<%- include('../partials/navbar') %>
+
+<body>
+  <div class="wrapper">
+    <!-- O conteúdo principal da página vai aqui -->
+    <div class="content">
+      <div class="container">
+        <br>
+        
+        <!-- Exibindo mensagens de sucesso e erro -->
+        <div class="container">
+        <% if (success.length > 0 || error.length > 0) { %>
+        <div class="msg-container">
+          <% if (success.length > 0) { %>
+          <div class="msg success"><%= success[0] %></div>
+          <% } %> <% if (error.length > 0) { %>
+          <div class="msg error"><%= error[0] %></div>
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h1 class="text-center">Novo Artico</h1>
+          </div>
+          <div class="card-body">
+            <form action="/categories/save" method="POST">
+              
+              <div class="mb-3">
+                <label for="name" class="form-label">Nome do Artico</label>
+                <input type="text" class="form-control" id="name" placeholder="Nome do Artico" name="name" required/>
+              </div>
+               <textarea class="form-control" placeholder="Escreva aqui o seu conteudo" name="body" id="articles"></textarea>
+              <button type="submit" class="btn btn-primary"> Criar Artico</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rodapé -->
+    <%- include('../partials/footer') %>
+  </div>
+</body>
+
+
+<script src="https://cdn.tiny.cloud/1/p34esni0kv6yvziliikta52dfu0ehl9p0rpknihzcz204drt/tinymce/7/tinymce.min.js" referrerpolicy="origin" no-api-key></script>
+
+<script>
+tinymce.init({
+  language: 'pt_BR',
+  selector: '#articles',
+  height: 500,
+  plugins: 'advlist autolink link image print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+});
+
+
+</script>
