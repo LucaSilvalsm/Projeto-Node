@@ -33,6 +33,13 @@
                 <input type="text" class="form-control" id="name" placeholder="Nome do Artico" name="name" required/>
               </div>
                <textarea class="form-control" placeholder="Escreva aqui o seu conteudo" name="body" id="articles"></textarea>
+               <label for="category">Categorias</label>
+               <select class="form-control" name="category" id="category">
+                <% categories.forEach(function(category) { %>
+                  <option value="<%= category.id %>"><%= category.title %></option>
+                <% }); %>
+               </select>
+               <br>          
               <button type="submit" class="btn btn-primary"> Criar Artico</button>
             </form>
           </div>
@@ -52,7 +59,7 @@
 tinymce.init({
   language: 'pt_BR',
   selector: '#articles',
-  height: 500,
+  height: 400,
   plugins: 'advlist autolink link image print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
 });
 
