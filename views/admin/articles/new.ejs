@@ -26,17 +26,18 @@
             <h1 class="text-center">Novo Artico</h1>
           </div>
           <div class="card-body">
-            <form action="/categories/save" method="POST">
+            <form action="/articles/save" method="POST">
               
               <div class="mb-3">
-                <label for="name" class="form-label">Nome do Artico</label>
-                <input type="text" class="form-control" id="name" placeholder="Nome do Artico" name="name" required/>
+                <label for="title" class="form-label">Nome do Artico</label>
+                <input type="text" class="form-control" id="title" placeholder="Nome do Artico" name="title" required/>
               </div>
                <textarea class="form-control" placeholder="Escreva aqui o seu conteudo" name="body" id="articles"></textarea>
                <label for="category">Categorias</label>
                <select class="form-control" name="category" id="category">
                 <% categories.forEach(function(category) { %>
                   <option value="<%= category.id %>"><%= category.title %></option>
+                  
                 <% }); %>
                </select>
                <br>          
