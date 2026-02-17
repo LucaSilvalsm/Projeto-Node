@@ -3,7 +3,7 @@ const router = express.Router();
 const Articles = require('./Article'); // seu model
 const slugify = require('slugify');    // cria url amigável
 const flash = require('connect-flash'); // middleware do flash
-const Category = require('../categories/Category'); // seu model de categorias
+const Category = require('../Category/Category'); // seu model de categorias
 
 // rota de teste
 router.get("/admin/articles", (req, res) => {
@@ -20,7 +20,9 @@ router.get("/admin/articles", (req, res) => {
 
 // rota para renderizar o formulário de novo artigo
 router.get("/admin/articles/new", (req, res) => {
-    Category.findAll().then(categories => {
+    Category.findAll({
+        include: [{model: Articles}] // inclui os artigos relacionados
+    }).then(categories => {
         res.render("admin/articles/new", {categories: categories});
     }).catch(err => {
         req.flash("error", "Erro ao carregar categorias");

@@ -34,32 +34,45 @@ router.post("/categories/save", (req, res) => {
     res.redirect("/admin/categories/new"); // Redireciona se o título estiver vazio
   }
 });
-router.post("/categories/delete", (req, res) => {
+router.post("/categories/delete", async (req, res) => {
   let acao = req.body.acao;
   let id = req.body.id;
 
-  if (acao === "deletar") {  // Verifica se a ação é deletar
-    if (id) {
-      Category.destroy({
-        where: { id: id }
-      }).then(() => {
-        req.flash("success", "Categoria apagada com sucesso!");
-        res.redirect("/admin/categories");
-      }).catch((err) => {
-        console.error(err);
-        req.flash("error", "Erro ao apagar a categoria!");
-        res.redirect("/admin/categories");
-      });
-    } else {
+  if (acao === "deletar") {
+    if (!id) {
       req.flash("error", "ID inválido para deletar!");
-      res.redirect("/admin/categories");
+      return res.redirect("/admin/categories");
     }
+
+    try {
+      await Category.destroy({
+        where: { id: id }
+      });
+
+      req.flash("success", "Categoria apagada com sucesso!");
+      return res.redirect("/admin/categories");
+
+    } catch (err) {
+      console.error(err);
+
+      //  TRATAMENTO ESPECÍFICO DA FOREIGN KEY
+      if (err.name === "SequelizeForeignKeyConstraintError") {
+        req.flash(
+          "error",
+          "Não é possível apagar a categoria vinculada a um artigo."
+        );
+      } else {
+        req.flash("error", "Erro ao apagar a categoria!");
+      }
+
+      return res.redirect("/admin/categories");
+    }
+
   } else {
     req.flash("error", "Erro ao tentar realizar a ação!");
-    res.redirect("/admin/categories");
+    return res.redirect("/admin/categories");
   }
 });
-
 
 router.get("/admin/categories", (req, res) => {
     Category.findAll().then(categories => {

@@ -6,11 +6,11 @@ const flash = require('connect-flash');
 const session = require('express-session'); // Adicionei a Session para usar o flash
 
 // Importando os Models
-const Category = require('./categories/Category');
+const Category = require('./Category/Category');
 const Article = require('./Articles/Article');
 
 // Importando os Controllers
-const categoriaController = require('./categories/categoriesController');
+const categoriaController = require('./Category/CategoryController');
 const articlesController = require('./Articles/ArticlesController');
 const loginController = require('./login/loginController');
 
@@ -42,12 +42,13 @@ app.use((req, res, next) => {
 });
 // Conexão com o banco de dados
 conectar.authenticate()
-    .then(() => {
-        console.log('Conexão com o banco de dados foi estabelecida');
-    })
-    .catch((msgError) => {
-        console.log(msgError);
-    });
+  .then(() => {
+    console.log('Conexão com o banco de dados foi estabelecida');
+    // return conectar.sync(); // sincronizando os modelos com o banco de dados
+  })
+  .catch((msgError) => {
+    console.log(msgError);
+  });
 
 // Definindo as rotas
 app.use('/', categoriaController);

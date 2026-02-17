@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 const conn = require('../Database/database')
-const Category = require('../categories/Category')
+const Category = require('../Category/Category')
 const Article = conn.define('article',{
     id:{
         type: sequelize.INTEGER,
@@ -13,6 +13,14 @@ const Article = conn.define('article',{
     },
     body:{
         type: sequelize.TEXT,
+        allowNull: false
+    },
+    title: {
+        type: sequelize.STRING,
+        allowNull: false
+    },
+    category_id: {
+        type: sequelize.INTEGER,
         allowNull: false
     }
 

@@ -36,8 +36,9 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            
+            <th scope="col"># ID</th>
+            <th scope="col">Titulo</th>            
+            <th scope ="col">Categoria</th>
             <th scope="col">Slug</th>
             <th scope="col">Ação</th>
           </tr>
@@ -46,7 +47,8 @@
           <% articles.forEach(articles => { %>
           <tr>
             <th scope="row"><%= articles.id %></th>
-           
+            <td><%= articles.title %></td>   
+            <td><%= articles.category.title %></td>        
             <td><%= articles.slug %></td>
             <td>
              <form action="/articles/delete" method="post" class="delete-form">
@@ -56,8 +58,7 @@
 
                 <a href="/admin/articles/edit/<%= articles.id %>" class="btn btn-warning">Editar</a>
                 <button type="button" class="btn btn-danger" onclick="abrirModal(this.form)">Apagar</button>
-              </form>
-
+              </form>            
             </td>
           </tr>
           <% }) %>
