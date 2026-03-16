@@ -3,65 +3,120 @@ const conectar = require('./Database/database');
 const app = express();
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
-const session = require('express-session'); // Adicionei a Session para usar o flash
+const session = require('express-session');
+const path = require('path');
+const he = require('he');
 
-// Importando os Models
+// =======================
+// IMPORTANDO MODELS
+// =======================
 const Category = require('./Category/Category');
 const Article = require('./Articles/Article');
 
-// Importando os Controllers
+// =======================
+// IMPORTANDO CONTROLLERS
+// =======================
 const categoriaController = require('./Category/CategoryController');
 const articlesController = require('./Articles/ArticlesController');
 const loginController = require('./login/loginController');
 
-// Carregando a views engine
+// =======================
+// VIEW ENGINE
+// =======================
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views')); // ✅ garante o caminho
 
-// Setando arquivos estáticos como CSS
-app.use(express.static('public'));
+// =======================
+// ARQUIVOS ESTÁTICOS
+// =======================
+app.use(express.static('public')); // ✅ apenas uma vez
 
-// Setando o body-parser
+// =======================
+// BODY PARSER
+// =======================
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Configurando a sessão antes do flash
-app.use(session({
+// =======================
+// SESSION (ANTES DO FLASH)
+// =======================
+app.use(
+  session({
     secret: 'seu-segredo',
     resave: false,
-    saveUninitialized: true
-}));
+    saveUninitialized: true,
+  }),
+);
 
-// Configurando o middleware do flash
+// =======================
+// FLASH
+// =======================
 app.use(flash());
 
-// Middleware para tornar as mensagens acessíveis nas views
+// =======================
+// MENSAGENS GLOBAIS
+// =======================
 app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
 });
-// Conexão com o banco de dados
-conectar.authenticate()
+
+// =======================
+// BANCO DE DADOS
+// =======================
+conectar
+  .authenticate()
   .then(() => {
-    console.log('Conexão com o banco de dados foi estabelecida');
-    // return conectar.sync(); // sincronizando os modelos com o banco de dados
+    console.log('✅ Conexão com o banco estabelecida');
+    return conectar.sync();
   })
-  .catch((msgError) => {
-    console.log(msgError);
+  .then(() => {
+    console.log('✅ Models sincronizados');
+  })
+  .catch((err) => {
+    console.error('❌ Erro no banco:', err);
   });
 
-// Definindo as rotas
+// =======================
+// ROTAS
+// =======================
 app.use('/', categoriaController);
 app.use('/', loginController);
 app.use('/', articlesController);
 
-app.get('/', (req, res) => {
-    res.render('index');
+app.get('/', async (req, res) => {
+  try {
+    const articles = await Article.findAll({
+      include: [{ model: Category }],
+    });
+
+    // 🔥 limpeza profissional
+    const articlesClean = articles.map((a) => {
+      const decoded = he.decode(a.body || '');
+
+      const textOnly = decoded
+        .replace(/<[^>]*>/g, '') // remove HTML
+        .replace(/\s+/g, ' ') // normaliza espaços
+        .trim();
+
+      return {
+        ...a.dataValues,
+        preview: textOnly.substring(0, 240),
+      };
+    });
+
+    res.render('index', { articles: articlesClean });
+  } catch (err) {
+    console.error('Erro ao carregar artigos:', err);
+    res.status(500).send('Erro interno ao carregar artigos');
+  }
 });
 
-// Iniciando o servidor
+// =======================
+// SERVIDOR
+// =======================
 app.listen(8080, () => {
-    console.log('Server rodando na porta 8080');
-    console.log('Visit http://localhost:8080 ');
+  console.log('🚀 Server rodando na porta 8080');
+  console.log('👉 http://localhost:8080');
 });
-// Sincronizando os modelos com o banco de dados
