@@ -113,6 +113,25 @@ app.get('/', async (req, res) => {
   }
 });
 
+// Rota para exibir um artigo específico
+app.get('/:slug',(req,res)=>{
+  const slug = req.params.slug;
+  Article.findOne({
+    where: {
+      slug: slug
+    }
+  }).then(article=>{
+    if(article){
+      res.render('article',{article: article});
+    }else{
+      res.redirect('/');
+    }
+  }).catch(err=>{
+    console.log(err);
+    res.redirect('/');
+  })
+})
+
 // =======================
 // SERVIDOR
 // =======================
