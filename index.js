@@ -102,7 +102,7 @@ app.get('/', async (req, res) => {
 
       return {
         ...a.dataValues,
-        preview: textOnly.substring(0, 240),
+        preview: textOnly.substring(0, 350),
       };
     });
 

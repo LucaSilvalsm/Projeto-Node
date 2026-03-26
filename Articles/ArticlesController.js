@@ -63,7 +63,7 @@ router.post('/articles/save', upload.single('image'), async (req, res) => {
     let imagePath = null;
 
     if (req.file) {
-      imagePath = '/img/' + req.file.filename; // ✅ corrigido
+      imagePath = '/img/' + req.file.filename; //
     }
 
     await Articles.create({
@@ -79,6 +79,38 @@ router.post('/articles/save', upload.single('image'), async (req, res) => {
   } catch (err) {
     console.error(err);
     req.flash('error', 'Erro ao criar artigo!');
+    res.redirect('/admin/articles');
+  }
+});
+// =============================
+// UPDATE DE ARTIGO
+// =============================
+router.post('/articles/update', upload.single('image'), async (req, res) => {
+  try {
+    const { id, title, body, category } = req.body;
+
+    let imagePath = null;
+
+    if (req.file) {
+      imagePath = '/img/' + req.file.filename; // ✅ corrigido
+    }
+
+    await Articles.update(
+      {
+        title,
+        slug: slugify(title),
+        body,
+        category_id: category,
+        image: imagePath,
+      },
+      { where: { id: id } },
+    );
+
+    req.flash('success', 'Artigo atualizado com sucesso!');
+    res.redirect('/admin/articles');
+  } catch (err) {
+    console.error(err);
+    req.flash('error', 'Erro ao atualizar artigo!');
     res.redirect('/admin/articles');
   }
 });
@@ -117,27 +149,6 @@ router.get('/admin/articles/edit/:id', async (req, res) => {
 // =============================
 // ATUALIZAR
 // =============================
-router.post('/articles/update', async (req, res) => {
-  try {
-    const { id, title } = req.body;
 
-    await Articles.update(
-      {
-        title,
-        slug: slugify(title),
-      },
-      {
-        where: { id },
-      },
-    );
-
-    req.flash('success', 'Artigo atualizado com sucesso!');
-    res.redirect('/admin/articles');
-  } catch (err) {
-    console.error(err);
-    req.flash('error', 'Erro ao atualizar o artigo!');
-    res.redirect('/admin/articles');
-  }
-});
 
 module.exports = router;

@@ -100,3 +100,39 @@ footer {
         width: 90%;  /* Em telas pequenas, a mensagem ocupará 90% da largura */
     }
 }
+/* Estilo para a imagem do artigo no formulário de edição */
+
+.card-img-edit {
+  border-radius: 50px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.card-img-top {
+  border-radius: 12px; /* ajuste o valor como quiser */
+}
+
+.card {
+  border-radius: 15px;
+  overflow: hidden; /* importante pra imagem respeitar a borda */
+}
+
+.card img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.card {
+  border-radius: 25px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.card-title{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
