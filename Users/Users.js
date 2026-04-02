@@ -5,21 +5,21 @@ const User = conn.define('user', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
-  email:{
+  email: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
-    password: {
+  password: {
     type: Sequelize.STRING,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
 module.exports = User;

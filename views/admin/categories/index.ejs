@@ -1,4 +1,4 @@
-<%- include('../partials/header') %> 
+<%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
 
 <div class="wrapper">
@@ -13,7 +13,7 @@
         <div class="msg-container">
           <% if (success.length > 0) { %>
           <div class="msg success"><%= success[0] %></div>
-          <% } %> 
+          <% } %>
           <% if (error.length > 0) { %>
           <div class="msg error"><%= error[0] %></div>
           <% } %>
@@ -49,15 +49,18 @@
             <td><%= category.title %></td>
             <td><%= category.slug %></td>
             <td>
-             <form action="/categories/delete" method="post" class="delete-form">
-                <input type="hidden" name="id" value="<%= category.id %>">
+              <form action="/categories/delete" method="post" class="delete-form">
+                <input type="hidden" name="id" value="<%= category.id %>" />
                 <!-- garante que 'acao' seja enviado mesmo com form.submit() -->
-                <input type="hidden" name="acao" value="deletar">
+                <input type="hidden" name="acao" value="deletar" />
 
-                <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
-                <button type="button" class="btn btn-danger" onclick="abrirModal(this.form)">Apagar</button>
+                <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning"
+                  >Editar</a
+                >
+                <button type="button" class="btn btn-danger" onclick="abrirModal(this.form)">
+                  Apagar
+                </button>
               </form>
-
             </td>
           </tr>
           <% }) %>
@@ -67,24 +70,33 @@
   </div>
 
   <!-- Modal Bootstrap -->
-<!-- Modal Bootstrap -->
-<div class="modal" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body text-center">
-        Tem certeza que deseja deletar esta categoria?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <button type="button" class="btn btn-danger" id="confirmYes">Sim</button>
+  <!-- Modal Bootstrap -->
+  <div
+    class="modal"
+    id="confirmModal"
+    tabindex="-1"
+    aria-labelledby="confirmModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Fechar"
+          ></button>
+        </div>
+        <div class="modal-body text-center">Tem certeza que deseja deletar esta categoria?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-danger" id="confirmYes">Sim</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <!-- Rodapé -->
   <%- include('../partials/footer') %>
@@ -95,11 +107,11 @@
 
   function abrirModal(form) {
     formToSubmit = form;
-    const modal = new bootstrap.Modal(document.getElementById("confirmModal"));
+    const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
     modal.show();
   }
 
-  document.getElementById("confirmYes").addEventListener("click", () => {
+  document.getElementById('confirmYes').addEventListener('click', () => {
     if (formToSubmit) formToSubmit.submit(); // agora envia id + acao
   });
 </script>

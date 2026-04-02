@@ -14,15 +14,13 @@ const Category = require('./Category/Category');
 const Article = require('./Articles/Article');
 const User = require('./Users/Users');
 
-
 // =======================
 // IMPORTANDO CONTROLLERS
 // =======================
 const categoriaController = require('./Category/CategoryController');
 const articlesController = require('./Articles/ArticlesController');
-const loginController = require('./login/loginController');
-const userController = require('./Users/UserController');
 
+const userController = require('./Users/UserController');
 
 // =======================
 // VIEW ENGINE
@@ -49,7 +47,7 @@ app.use(
     secret: 'seu-segredo',
     resave: false,
     saveUninitialized: true,
-  }),
+  })
 );
 
 // =======================
@@ -86,10 +84,8 @@ conectar
 // ROTAS
 // =======================
 app.use('/', categoriaController);
-app.use('/', loginController);
 app.use('/', articlesController);
 app.use('/', userController);
-
 
 app.get('/', async (req, res) => {
   try {
@@ -120,23 +116,25 @@ app.get('/', async (req, res) => {
 });
 
 // Rota para exibir um artigo específico
-app.get('/:slug',(req,res)=>{
+app.get('/:slug', (req, res) => {
   const slug = req.params.slug;
   Article.findOne({
     where: {
-      slug: slug
-    }
-  }).then(article=>{
-    if(article){
-      res.render('article',{article: article});
-    }else{
-      res.redirect('/');
-    }
-  }).catch(err=>{
-    console.log(err);
-    res.redirect('/');
+      slug: slug,
+    },
   })
-})
+    .then((article) => {
+      if (article) {
+        res.render('article', { article: article });
+      } else {
+        res.redirect('/');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect('/');
+    });
+});
 
 // =======================
 // SERVIDOR

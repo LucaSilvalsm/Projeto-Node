@@ -1,46 +1,47 @@
 /* Cor de fundo e tamanho da fonte */
 body {
-    background-color: #eceff1;
-    font-size: 20px;
+  background-color: #eceff1;
+  font-size: 20px;
 }
 
 .navbar {
-    align-items: center;
-    text-align: center;
+  align-items: center;
+  text-align: center;
 }
 
 .centralizado {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 10px;
-    padding: 0 10px;
-    margin-left: 20px;  /* Ajuste o valor conforme necessário */
-    margin-right: 20px;  /* Ajuste o valor conforme necessário */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 10px;
+  padding: 0 10px;
+  margin-left: 20px; /* Ajuste o valor conforme necessário */
+  margin-right: 20px; /* Ajuste o valor conforme necessário */
 }
 
 /* Garantir que a altura do body e html ocupe 100% da altura da tela */
-html, body {
-    height: 100%;
-    margin: 0; /* Remove as margens padrões do navegador */
+html,
+body {
+  height: 100%;
+  margin: 0; /* Remove as margens padrões do navegador */
 }
 
 /* Container que envolve o conteúdo principal e o footer */
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Garante que o wrapper ocupe 100% da altura */
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Garante que o wrapper ocupe 100% da altura */
 }
 
 /* O conteúdo da página que vai ocupar o espaço restante */
 .content {
-    flex: 1; /* Faz o conteúdo principal ocupar o espaço restante */
+  flex: 1; /* Faz o conteúdo principal ocupar o espaço restante */
 }
 
 /* Footer */
 footer {
-    margin-top: auto; /* Faz o footer ficar no final */
+  margin-top: auto; /* Faz o footer ficar no final */
 }
 /* Container das mensagens de flash */
 .msg-container {
@@ -59,46 +60,55 @@ footer {
 /* Estilo para mensagens de erro */
 .msg.error {
   color: #842029;
-  background-color: #F8D7DA;
-  border-color: #F5C2C7;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
 }
 
 /* Estilo para mensagens de sucesso */
 .msg.success {
   color: black;
-  background-color: #D1E7DD;
-  border-color: #BADBCC;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
 }
 .modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
 }
 .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 300px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 300px;
 }
 .btn {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
- }
-.btn-danger { background: red; color: white; }
-.btn-secondary { background: gray; color: white; }
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.btn-danger {
+  background: red;
+  color: white;
+}
+.btn-secondary {
+  background: gray;
+  color: white;
+}
 
 /* Resposta responsiva */
 @media (max-width: 768px) {
-    .msg {
-        width: 90%;  /* Em telas pequenas, a mensagem ocupará 90% da largura */
-    }
+  .msg {
+    width: 90%; /* Em telas pequenas, a mensagem ocupará 90% da largura */
+  }
 }
 /* Estilo para a imagem do artigo no formulário de edição */
 
@@ -124,15 +134,17 @@ footer {
 .card {
   border-radius: 25px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
-.card-title{
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }

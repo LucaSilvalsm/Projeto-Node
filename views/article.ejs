@@ -3,29 +3,19 @@
 
 <body>
   <div class="container mt-5">
-
     <div class="card">
-
       <% if(article.image){ %>
-        <img src="<%= article.image %>" class="card-img-top" alt="<%= article.title %>">
+      <img src="<%= article.image %>" class="card-img-top" alt="<%= article.title %>" />
       <% } %>
 
       <div class="card-body">
+        <h1 class="card-title"><%= article.title %></h1>
 
-        <h1 class="card-title">
-          <%= article.title %>
-        </h1>
+        <hr />
 
-        <hr>
-
-        <div class="card-text">
-          <%- article.body %>
-        </div>
-
+        <div class="card-text"><%- article.body %></div>
       </div>
-
     </div>
-
   </div>
 </body>
 

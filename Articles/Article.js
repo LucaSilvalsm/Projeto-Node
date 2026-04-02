@@ -6,35 +6,33 @@ const Article = conn.define('article', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   slug: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   body: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   title: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   category_id: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   image: {
     type: Sequelize.STRING,
-    allowNull: true
-  }
+    allowNull: true,
+  },
 });
-
 
 // relacionamentos
 Article.belongsTo(Category, { foreignKey: 'category_id' });
 Category.hasMany(Article, { foreignKey: 'category_id' });
 module.exports = Article;
-
 
 Article.sync();

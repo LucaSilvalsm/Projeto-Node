@@ -14,10 +14,7 @@ var storage = multer.diskStorage({
     cb(null, 'public/img');
   },
   filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname),
-    );
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   },
 });
 
@@ -103,7 +100,7 @@ router.post('/articles/update', upload.single('image'), async (req, res) => {
         category_id: category,
         image: imagePath,
       },
-      { where: { id: id } },
+      { where: { id: id } }
     );
 
     req.flash('success', 'Artigo atualizado com sucesso!');
@@ -149,6 +146,5 @@ router.get('/admin/articles/edit/:id', async (req, res) => {
 // =============================
 // ATUALIZAR
 // =============================
-
 
 module.exports = router;
