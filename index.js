@@ -12,6 +12,8 @@ const he = require('he');
 // =======================
 const Category = require('./Category/Category');
 const Article = require('./Articles/Article');
+const User = require('./Users/Users');
+
 
 // =======================
 // IMPORTANDO CONTROLLERS
@@ -19,6 +21,8 @@ const Article = require('./Articles/Article');
 const categoriaController = require('./Category/CategoryController');
 const articlesController = require('./Articles/ArticlesController');
 const loginController = require('./login/loginController');
+const userController = require('./Users/UserController');
+
 
 // =======================
 // VIEW ENGINE
@@ -84,6 +88,8 @@ conectar
 app.use('/', categoriaController);
 app.use('/', loginController);
 app.use('/', articlesController);
+app.use('/', userController);
+
 
 app.get('/', async (req, res) => {
   try {
