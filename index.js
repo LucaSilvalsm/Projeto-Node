@@ -45,6 +45,7 @@ app.use(bodyParser.json());
 app.use(
   session({
     secret: 'seu-segredo',
+    cookie: { maxAge: 300000 },
     resave: false,
     saveUninitialized: true,
   })
