@@ -63,12 +63,17 @@ router.post("/admin/users/delete/:id", (req,res) =>{
 });
 
 
-router.get('/admin/users/logout', (req, res) => {
-  req.session.destroy();
-  req.flash('success', 'Logout bem-sucedido.');
-  res.redirect('/');
-});
+router.get('/logout', (req, res) => {
+  if (req.session.user) {
+    delete req.session.user; // 🔥 remove só o usuário
 
+    req.flash('success', 'Logout bem-sucedido.');
+    return res.redirect('/');
+  } else {
+    req.flash('error', 'Usuário não está logado.');
+    return res.redirect('/');
+  }
+});
 router.post('/users/create', (req, res) => {
   const { name, email, password } = req.body;
 

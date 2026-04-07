@@ -5,6 +5,7 @@ const slugify = require('slugify');
 const Category = require('../Category/Category');
 const multer = require('multer');
 const path = require('path');
+const adminAuth = require('../middleware/adminAuth');
 
 // =============================
 // CONFIGURAÇÃO DO UPLOAD
@@ -23,7 +24,7 @@ var upload = multer({ storage: storage });
 // =============================
 // LISTAR ARTIGOS
 // =============================
-router.get('/admin/articles', async (req, res) => {
+router.get('/admin/articles', adminAuth, async (req, res) => {
   try {
     const articles = await Articles.findAll({
       include: [{ model: Category }],
@@ -39,7 +40,7 @@ router.get('/admin/articles', async (req, res) => {
 // =============================
 // NOVO ARTIGO
 // =============================
-router.get('/admin/articles/new', async (req, res) => {
+router.get('/admin/articles/new', adminAuth, async (req, res) => {
   try {
     const categories = await Category.findAll();
     res.render('admin/articles/new', { categories });

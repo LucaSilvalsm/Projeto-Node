@@ -2,17 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Category = require('./Category');
 const slugify = require('slugify');
+const adminAuth = require('../middleware/adminAuth');
 // slugify: cria uma url amigavel ex: "Minha Categoria" vira "minha-categoria"
 
 const flash = require('connect-flash');
 // Middleware do flash (depois da sessão)
 
-router.get('/admin/categories/new', (req, res) => {
+router.get('/admin/categories/new' , adminAuth, (req, res) => {
   // Renderiza a página de criação de nova categoria
 
   res.render('admin/categories/new');
 });
-router.post('/categories/save', (req, res) => {
+router.post('/categories/save', adminAuth, (req, res) => {
   const title = req.body.name; // Corrigido para `name` (do campo de entrada no formulário)
 
   if (title && title.trim() !== '') {
@@ -33,7 +34,7 @@ router.post('/categories/save', (req, res) => {
     res.redirect('/admin/categories/new'); // Redireciona se o título estiver vazio
   }
 });
-router.post('/categories/delete', async (req, res) => {
+router.post('/categories/delete', adminAuth, async (req, res) => {
   let acao = req.body.acao;
   let id = req.body.id;
 
@@ -68,7 +69,7 @@ router.post('/categories/delete', async (req, res) => {
   }
 });
 
-router.get('/admin/categories', (req, res) => {
+router.get('/admin/categories', adminAuth, (req, res) => {
   Category.findAll().then((categories) => {
     res.render('admin/categories/index', { categories: categories });
   });
